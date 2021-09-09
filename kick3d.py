@@ -17,7 +17,7 @@ if option == "username":
     if user:
         print(user)
     else:
-        print("user not found")
+        print("User not found")
 elif option == "userlist":
     userlist = input("Enter a userlist: ")
     output = "valid.txt"
