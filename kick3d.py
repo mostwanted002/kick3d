@@ -28,6 +28,6 @@ elif option == "userlist":
             if user:
                 with open(output, "a") as v:
                     v.write(f"{user}\n")
-    print(f"valid users were written to {output}")
+    print(f"Valid users were written to {output}")
 else:
     print ("Invalid option")
