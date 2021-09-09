@@ -1,25 +1,33 @@
 import requests
 import json
 import sys
+from types import SimpleNamespace
 
-target = "https://ws2.kik.com/user/{check}"
 option = input("Do you want to check a username or userlist? ")
 
+def check_user(uid):
+    target = f"https://ws2.kik.com/user/{uid}"
+    r = requests.get(target)
+    if r.status_code == 200:
+        return r.json()
 
 if option == "username":
-    check = input("Enter the uid: ")
-    r = requests.get(target)
-    if r.????contains("firstName:"):
-       print(r.json())
+    uid = input("Enter the uid: ")
+    user = check_user(uid)
+    if user:
+        print(user)
     else:
-        print("User not found")
-elif option == "wordlist":
-    wordlist = input("Enter a wordlist: ")
-    with open(wordlist, 'r') as f:
+        print("user not found")
+elif option == "userlist":
+    userlist = input("Enter a userlist: ")
+    output = "valid.txt"
+    with open(userlist, 'r') as f:
         for line in f:
-            check = line.strip()
-            r = requests.get(target)
-            if r.status_code == 200:
-                print(r.json())
+            uid = line.strip()
+            user = check_user(uid)
+            if user:
+                with open(output, "a") as v:
+                    v.write(f"{user}\n")
+    print(f"valid users were written to {output}")
 else:
     print ("Invalid option")
