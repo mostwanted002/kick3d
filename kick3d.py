@@ -1,7 +1,6 @@
 import requests
 import json
 import sys
-from types import SimpleNamespace
 
 option = input("Do you want to check a username or userlist? ")
 
